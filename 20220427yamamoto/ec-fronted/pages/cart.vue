@@ -98,11 +98,10 @@ export default {
     },
     update(id) {
       const form = document.querySelector(`.item__quantity-input--${id}`);
-      const value = +form.value;
-      if (value % 1 !== 0) {
-        form.value = Math.floor(value);
+      if (+form.value < 0 && form.value !== null) {
+        alert('個数が不適切です。');
+        form.value = 0;
       }
-      form.value = Math.max(0, value);
       const data = {
         id: id,
         quantity: form.value,
@@ -110,9 +109,13 @@ export default {
       this.$store.commit('updateCart', data);
     },
     async orderItems() {
-      const ch = this.itemList.filter(item => item.quantity === 0);
-      if (ch.length) {
-        alert('個数が0の商品があります。');
+      const ch1 = this.itemList.filter(item => item.quantity === 0);
+      const ch2 = this.itemList.filter(item => item.quantity % 1 !== 0);
+      if (ch1.length === this.itemList.length) {
+        alert('カートは空です。');
+        return;
+      } else if (ch1.length || ch2.length) {
+        alert('個数が不適切です。');
         return;
       }
       const sendData= {
@@ -278,10 +281,6 @@ export default {
       position: relative;
       top: 0;
       left: 0;
-    }
-
-    &__quantity-input {
-      width: 35px;
     }
   }
 }

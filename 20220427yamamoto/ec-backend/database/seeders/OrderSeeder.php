@@ -21,10 +21,10 @@ class OrderSeeder extends Seeder
                 $item = Order::create([
                     'id' => $faker->uuid(),
                 ]);
-                $rand1 = rand(1, 40);
+                $rand1 = rand(1, 120);
                 $rand2 = 0;
                 do {
-                    $rand2 = rand(1, 40);
+                    $rand2 = rand(1, 120);
                 } while ($rand2 === $rand1);
                 $item->products()->sync([
                     $rand1 => [

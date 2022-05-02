@@ -15,7 +15,7 @@
             class="detail__quantity-input"
             id="quantity"
             v-model="quantity"
-            @input="quantityCorrection"
+            @change="checkInputValue"
             >
         </div>
         <SubmitButton class="detail__btn" @clicked="addToCart">
@@ -54,8 +54,10 @@ export default {
   },
   methods: {
     addToCart() {
-      if (this.quantity == 0) {
-        alert('個数が0です。')
+      if (+this.quantity === 0) {
+        alert('個数が0です。');
+      } else if (+this.quantity < 0 || +this.quantity % 1 !== 0) {
+        alert('個数が不適切です。');
       } else {
         const data = {
           id: this.id,
@@ -68,11 +70,11 @@ export default {
         this.$router.push('/cart');
       }
     },
-    quantityCorrection() {
-      if (this.quantity % 1 !== 0) {
-          this.quantity = Math.floor(this.quantity);
-        }
-        this.quantity = Math.max(0, this.quantity); 
+    checkInputValue () {
+      const form = document.querySelector('.detail__quantity-input');
+      if (!form.value.match(/^[-]?([1-9]\d*|0)(\.\d+)?$/)) {
+        form.value = 0;
+      }
     }
   },
 };

@@ -119,17 +119,17 @@ export default {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     justify-items: center;
-    column-gap: 4%;
+    column-gap: 10px;
     row-gap: 10px;
     padding: 10px 30px;
   }
   
   &__product-img {
     cursor: pointer;
-    width: 200px;
+    width: 225px;
     & > img {
       width: 100%;
-      height: 200px;
+      height: calc(225px * 2 / 3);
       object-fit: cover;
     }
   }
@@ -185,9 +185,9 @@ export default {
 @media screen and (max-width: 1000px) {
   .top {
     &__product-img {
-      width: 150px;
+      width: 180px;
       & > img {
-        height: 150px;
+        height: calc(180px * 2 / 3);
       }
     }
   }
@@ -196,9 +196,9 @@ export default {
 @media screen and (max-width: 830px) {
   .top {
     &__product-img {
-      width: 130px;
+      width: 145px;
       & > img {
-        height: 130px;
+        height: calc(145px * 2 / 3);
       }
     }
   }
@@ -215,9 +215,9 @@ export default {
   }
 
     &__product-img {
-      width: 200px;
+      width: 230px;
       & > img {
-        height: 200px;
+        height: calc(230px * 2 / 3);
       }
     }
   }
